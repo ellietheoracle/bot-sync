@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "bot-sync"
+version = "0.1.0"
+description = "syncs emotes between rooms"
+authors = ["The Oracle  <ellietheoracle@protonmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+matrix-nio = "^0.13.0"
+
+[tool.poetry.dev-dependencies]
+black = "^19.10b0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
