@@ -25,9 +25,14 @@ async def main() -> None:
         client.access_token = config["access_token"]
         client.user_id = config["user_id"]
         client.device_id = config["device_id"]
+    
+    #import room data
+    with open(ROOMS_FILE, "r") as f:
+        config = json.load(f)
+        control_room = config["control_room"]
 
     # sends a test message
-    await bot_send_msg(client, "Emi, your love has caused my heart to bleed .")
+    await bot_send_msg(client, "<3", control_room)
 
     # ends the connection
     await client.close()
@@ -39,9 +44,9 @@ async def bot_send_state():
 
 
 # function to send messages
-async def bot_send_msg(client: AsyncClient, message: str):
+async def bot_send_msg(client: AsyncClient, message: str, room: str):
     await client.room_send(
-        room_id,
+        room,
         message_type="m.room.message",
         content={"msgtype": "m.text", "body": message},
     )
