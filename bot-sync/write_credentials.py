@@ -9,6 +9,7 @@ CONFIG_FILE = "restore_login_config.json"
 
 # Check out main() below to see how it's done.
 
+
 def write_details_to_disk(resp: LoginResponse) -> None:
     """Writes the required login details to disk so we can log in later without
     using a password.
@@ -21,11 +22,11 @@ def write_details_to_disk(resp: LoginResponse) -> None:
         # write the login details to disk
         json.dump(
             {
-            "access_token": resp.access_token,
-            "device_id": resp.device_id,
-            "user_id": resp.user_id
+                "access_token": resp.access_token,
+                "device_id": resp.device_id,
+                "user_id": resp.user_id,
             },
-            f
+            f,
         )
 
 
@@ -36,7 +37,7 @@ async def main() -> None:
     if not os.path.exists(CONFIG_FILE):
         resp = await client.login("DahTw7KVDmbqXX")
         # check that we logged in succesfully
-        if (isinstance(resp, LoginResponse)):
+        if isinstance(resp, LoginResponse):
             write_details_to_disk(resp)
         else:
             print(f"Failed to log in: {resp}")
@@ -44,7 +45,7 @@ async def main() -> None:
 
         print(
             "Logged in using a password.",
-            "Try running the script again to login with an access token"
+            "Try running the script again to login with an access token",
         )
 
     # Otherwise the config file exists, so we'll use the stored credentials
@@ -52,22 +53,20 @@ async def main() -> None:
         # open the file in read-only mode
         with open(CONFIG_FILE, "r") as f:
             config = json.load(f)
-            client.access_token = config['access_token']
-            client.user_id = config['user_id']
-            client.device_id = config['device_id']
+            client.access_token = config["access_token"]
+            client.user_id = config["user_id"]
+            client.device_id = config["device_id"]
 
         # Now we can send messages as the user
         await client.room_send(
-            room_id = "!xwkzwkGafsaYJOFWoj:the-apothecary.club",
+            room_id="!xwkzwkGafsaYJOFWoj:the-apothecary.club",
             message_type="m.room.message",
-            content = {
-                "msgtype": "m.text",
-                "body": "I'm sick of everything ."
-            }
+            content={"msgtype": "m.text", "body": "I'm sick of everything ."},
         )
         print("Logged in using stored credentials")
 
     # Either way we're logged in here, too
     await client.close()
+
 
 asyncio.get_event_loop().run_until_complete(main())
