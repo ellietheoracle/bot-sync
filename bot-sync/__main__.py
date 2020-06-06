@@ -41,28 +41,28 @@ async def main() -> None:
     ## print(room_state)
 
     # execute in each room
-    for bot_room in bot_rooms:
+    for room in bot_rooms:
 
         # logs room cycle
-        print("Syncing state in:", bot_room)
+        print("Syncing state in:", room["id"])
 
         # join rooms if not already joined
-        await client.join(bot_room)
+        await client.join(room["id"])
 
         # sends a test message
-        ## resp = await bot_send_msg(client, "Syncing...", bot_room)
+        ## resp = await bot_send_msg(client, "Syncing...", room["id"])
         print(resp)
         # sends a test state event
-        resp = await bot_set_emote(client, bot_room)
+        resp = await bot_set_emote(client, roon["id"])
         print(resp)
         # ends the connection
         await client.close()
 
 
 # function to send state events
-async def bot_set_emote(client: AsyncClient, bot_room: str):
+async def bot_set_emote(client: AsyncClient, room: str):
     return await client.room_put_state(
-        bot_room,
+        room,
         event_type="im.ponies.user_emotes",
         content={"short": {"test": "test"}},
     )

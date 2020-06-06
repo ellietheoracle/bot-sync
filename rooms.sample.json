@@ -1,7 +1,10 @@
 {
-    "control_room": "!id:example.org",
-    "template_room": "!id:example.org",
-    "rooms": {
-        "name":"!id:example.org"
-    }
+    "control_room": "<!id:example.org>",
+    "template_room": "<!id:example.org>",
+    "rooms": [
+        {
+            "name": "<name>",
+            "id": "<!id:example.org>"
+        }
+    ]
 }
