@@ -2,8 +2,8 @@
  sync emotes between rooms
 
 ## TODO
-- [ ] read rooms from json
-- [ ] auto-join rooms
+- [x] read rooms from json
+- [x] auto-join rooms
 - [ ] get state from source room
 - [ ] recieve commands
 - [ ] publish to rooms in list
