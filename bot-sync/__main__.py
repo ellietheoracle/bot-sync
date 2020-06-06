@@ -33,12 +33,12 @@ async def main() -> None:
         bot_template_room = config["template_room"]
         bot_rooms = config["rooms"]
 
-    await bot_send_msg(client, "Online", bot_control_room)
+    ## await bot_send_msg(client, "Online", bot_control_room)
 
     # get room state
     room_state = await client.room_get_state(bot_template_room)
 
-    # print(room_state)
+    ## print(room_state)
 
     # execute in each room
     for bot_room in bot_rooms:
@@ -50,7 +50,7 @@ async def main() -> None:
         await client.join(bot_room)
 
         # sends a test message
-        resp = await bot_send_msg(client, "Syncing...", bot_room)
+        ## resp = await bot_send_msg(client, "Syncing...", bot_room)
         print(resp)
         # sends a test state event
         resp = await bot_set_emote(client, bot_room)
