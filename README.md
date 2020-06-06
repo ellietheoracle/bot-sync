@@ -10,3 +10,4 @@ will eventually have template support, and other individual room features .
 - [ ] recieve commands
 - [x] publish to rooms in list
 - [ ] add rooms to list through commands
+- [ ] add readable error messages
