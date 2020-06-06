@@ -6,5 +6,5 @@
 - [x] auto-join rooms
 - [ ] get state from source room
 - [ ] recieve commands
-- [ ] publish to rooms in list
+- [x] publish to rooms in list
 - [ ] add rooms to list through commands

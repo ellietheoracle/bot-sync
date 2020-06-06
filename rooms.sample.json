@@ -1,0 +1,8 @@
+{
+    "control_room": "!id:example.org",
+    "template_room": "!id:example.org",
+    "rooms": [
+        "!id:example.org",
+        "!id:example.org"
+    ]
+}

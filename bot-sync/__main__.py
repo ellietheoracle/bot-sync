@@ -29,33 +29,48 @@ async def main() -> None:
     # import room data
     with open(ROOMS_FILE, "r") as f:
         config = json.load(f)
-        control_room = config["control_room"]
-        rooms = config["rooms"]
+        bot_control_room = config["control_room"]
+        bot_template_room = config["template_room"]
+        bot_rooms = config["rooms"]
 
-    await bot_send_msg(client, "Online", control_room)
+    await bot_send_msg(client, "Online", bot_control_room)
+
+    # get room state
+    room_state = await client.room_get_state(bot_template_room)
+
+    # print(room_state)
 
     # execute in each room
-    for room in rooms:
-        await client.join(room)
-        # sends a test message
-        await bot_send_msg(client, "Testing state events:", room)
+    for bot_room in bot_rooms:
 
+        # logs room cycle
+        print("Syncing state in:", bot_room)
+
+        # join rooms if not already joined
+        await client.join(bot_room)
+
+        # sends a test message
+        resp = await bot_send_msg(client, "Syncing...", bot_room)
+        print(resp)
         # sends a test state event
-        # await bot_set_emote(client,)
+        resp = await bot_set_emote(client, bot_room)
+        print(resp)
         # ends the connection
         await client.close()
 
 
 # function to send state events
-async def bot_set_emote(client: AsyncClient, room: str):
-    await client.room_put_state(
-        room, event_type="im.ponies.user_emotes", content={},
+async def bot_set_emote(client: AsyncClient, bot_room: str):
+    return await client.room_put_state(
+        bot_room,
+        event_type="im.ponies.user_emotes",
+        content={"short": {"test": "test"}},
     )
 
 
 # function to send messages
 async def bot_send_msg(client: AsyncClient, message: str, room: str):
-    await client.room_send(
+    return await client.room_send(
         room,
         message_type="m.room.message",
         content={"msgtype": "m.notice", "body": message},
