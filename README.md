@@ -1,5 +1,7 @@
 # bot-sync
- sync emotes between rooms
+Sync state events from a source room, to slave rooms in matrix . 
+
+will eventually have template support, and other individual room features .
 
 ## TODO
 - [x] read rooms from json
