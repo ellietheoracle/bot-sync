@@ -50,10 +50,10 @@ async def main() -> None:
         await client.join(room["id"])
 
         # sends a test message
-        ## resp = await bot_send_msg(client, "Syncing...", room["id"])
-        print(resp)
+        ##resp = await bot_send_msg(client, "Syncing...", room["id"])
+        ##print(resp)
         # sends a test state event
-        resp = await bot_set_emote(client, roon["id"])
+        resp = await bot_set_emote(client, room["id"])
         print(resp)
         # ends the connection
         await client.close()
@@ -62,9 +62,7 @@ async def main() -> None:
 # function to send state events
 async def bot_set_emote(client: AsyncClient, room: str):
     return await client.room_put_state(
-        room,
-        event_type="im.ponies.user_emotes",
-        content={"short": {"test": "test"}},
+        room, event_type="im.ponies.user_emotes", content={"short": {"test": "tube"}},
     )
 
 
