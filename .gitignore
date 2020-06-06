@@ -124,3 +124,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 restore_login_config.json
+rooms.json
